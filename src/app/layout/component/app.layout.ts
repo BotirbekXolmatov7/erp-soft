@@ -48,3 +48,5 @@ export class AppLayout {
         };
     })
 }
+
+export { AppLayout as AppLayoutComponent };

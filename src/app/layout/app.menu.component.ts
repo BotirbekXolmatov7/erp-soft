@@ -2,26 +2,28 @@ import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { AppMenuitem } from './app.menuitem';
-import { AuthService } from '@/app/core/services/auth.service';
+import { AppMenuitem } from './component/app.menuitem';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
     selector: 'app-menu',
     standalone: true,
     imports: [CommonModule, AppMenuitem, RouterModule],
-    template: `<ul class="layout-menu">
-        @for (item of menuItems(); track item.label) {
-            @if (item.visible !== false) {
-                @if (!item.separator) {
-                    <li app-menuitem [item]="item" [root]="true"></li>
-                } @else {
-                    <li class="menu-separator"></li>
+    template: `
+        <ul class="layout-menu">
+            @for (item of menuItems(); track item.label) {
+                @if (item.visible !== false) {
+                    @if (!item.separator) {
+                        <li app-menuitem [item]="item" [root]="true"></li>
+                    } @else {
+                        <li class="menu-separator"></li>
+                    }
                 }
             }
-        }
-    </ul> `
+        </ul>
+    `
 })
-export class AppMenu {
+export class AppMenuComponent {
     private readonly authService = inject(AuthService);
 
     // Dynamic reactive menu driven by AuthService signals and permissions
@@ -95,6 +97,7 @@ export class AppMenu {
         ];
     });
 
+    // Backward compatibility for components reading model property directly
     get model(): MenuItem[] {
         return this.menuItems();
     }
