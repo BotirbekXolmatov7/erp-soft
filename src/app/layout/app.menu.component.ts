@@ -33,9 +33,9 @@ export class AppMenuComponent {
 
         const canViewProducts = this.authService.hasPermission('products:read') || this.authService.hasPermission('PRODUCTS_VIEW');
         const canViewWarehouse = this.authService.hasPermission('warehouse:read') || this.authService.hasPermission('WAREHOUSE_VIEW');
-        const canViewSales = this.authService.hasPermission('SALES_VIEW');
+        const canViewSales = this.authService.hasPermission('sales:read') || this.authService.hasPermission('SALES_VIEW');
         const canViewProduction = this.authService.hasPermission('production:read') || this.authService.hasPermission('PRODUCTION_VIEW');
-        const canViewUsers = this.authService.hasPermission('USERS_VIEW');
+        const canViewUsers = this.authService.hasPermission('users:read') || this.authService.hasPermission('USERS_VIEW');
 
         const erpItems: MenuItem[] = [
             {

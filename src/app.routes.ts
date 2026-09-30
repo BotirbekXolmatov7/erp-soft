@@ -30,7 +30,7 @@ export const appRoutes: Routes = [
                 path: 'sales',
                 loadChildren: () => import('./app/features/sales/sales.routes'),
                 canActivate: [permissionGuard],
-                data: { permission: 'SALES_VIEW' }
+                data: { permissions: ['sales:read', 'SALES_VIEW'] }
             },
             {
                 path: 'production',
@@ -42,7 +42,7 @@ export const appRoutes: Routes = [
                 path: 'users',
                 loadChildren: () => import('./app/features/users/users.routes'),
                 canActivate: [permissionGuard],
-                data: { permission: 'USERS_VIEW' }
+                data: { permissions: ['users:read', 'USERS_VIEW'] }
             },
             { path: 'uikit', loadChildren: () => import('./app/pages/uikit/uikit.routes') },
             { path: 'documentation', component: Documentation },

@@ -1,4 +1,9 @@
 import { Routes } from '@angular/router';
-import { SalesListComponent } from './pages/sales-list.component';
+import { OrderListComponent } from './pages/order-list/order-list.component';
 
-export default [{ path: '', component: SalesListComponent }] as Routes;
+export default [
+    {
+        path: '',
+        component: OrderListComponent
+    }
+] as Routes;

@@ -1,4 +1,9 @@
 import { Routes } from '@angular/router';
-import { UsersListComponent } from './pages/users-list.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
 
-export default [{ path: '', component: UsersListComponent }] as Routes;
+export default [
+    {
+        path: '',
+        component: UserListComponent
+    }
+] as Routes;
