@@ -15,18 +15,7 @@ import { AppFloatingConfigurator } from '@/app/layout/component/app.floatingconf
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        RouterModule,
-        ButtonModule,
-        CheckboxModule,
-        InputTextModule,
-        PasswordModule,
-        RippleModule,
-        ToastModule,
-        AppFloatingConfigurator
-    ],
+    imports: [CommonModule, ReactiveFormsModule, RouterModule, ButtonModule, CheckboxModule, InputTextModule, PasswordModule, RippleModule, ToastModule, AppFloatingConfigurator],
     providers: [MessageService],
     template: `
         <p-toast />
@@ -50,15 +39,7 @@ import { AppFloatingConfigurator } from '@/app/layout/component/app.floatingconf
                             <!-- Email -->
                             <div class="flex flex-col gap-2">
                                 <label for="email" class="text-surface-900 dark:text-surface-0 font-medium">Elektron pochta</label>
-                                <input
-                                    pInputText
-                                    id="email"
-                                    type="email"
-                                    formControlName="email"
-                                    placeholder="nomingiz@kompaniya.uz"
-                                    class="w-full md:w-96"
-                                    [class.ng-dirty]="isFieldInvalid('email')"
-                                />
+                                <input pInputText id="email" type="email" formControlName="email" placeholder="nomingiz@kompaniya.uz" class="w-full md:w-96" [class.ng-dirty]="isFieldInvalid('email')" />
                                 @if (isFieldInvalid('email')) {
                                     <small class="text-red-500 font-medium">To'g'ri elektron pochta manzilini kiriting</small>
                                 }
@@ -67,16 +48,7 @@ import { AppFloatingConfigurator } from '@/app/layout/component/app.floatingconf
                             <!-- Password -->
                             <div class="flex flex-col gap-2">
                                 <label for="password" class="text-surface-900 dark:text-surface-0 font-medium">Parol</label>
-                                <p-password
-                                    id="password"
-                                    formControlName="password"
-                                    placeholder="••••••••"
-                                    [toggleMask]="true"
-                                    [feedback]="false"
-                                    [fluid]="true"
-                                    styleClass="w-full md:w-96"
-                                    [class.ng-dirty]="isFieldInvalid('password')"
-                                ></p-password>
+                                <p-password id="password" formControlName="password" placeholder="••••••••" [toggleMask]="true" [feedback]="false" [fluid]="true" styleClass="w-full md:w-96" [class.ng-dirty]="isFieldInvalid('password')"></p-password>
                                 @if (isFieldInvalid('password')) {
                                     <small class="text-red-500 font-medium">Parolni kiritish majburiy (kamida 6 belgi)</small>
                                 }
@@ -92,13 +64,7 @@ import { AppFloatingConfigurator } from '@/app/layout/component/app.floatingconf
                             </div>
 
                             <!-- Submit Button -->
-                            <p-button
-                                type="submit"
-                                label="Kirish"
-                                icon="pi pi-sign-in"
-                                [loading]="loading()"
-                                styleClass="w-full py-3 font-semibold"
-                            ></p-button>
+                            <p-button type="submit" label="Kirish" icon="pi pi-sign-in" [loading]="loading()" styleClass="w-full py-3 font-semibold"></p-button>
                         </form>
                     </div>
                 </div>
@@ -132,7 +98,7 @@ export class LoginComponent {
             this.messageService.add({
                 severity: 'warn',
                 summary: 'Ogohlantirish',
-                detail: 'Iltimos, barcha maydonlarni to\'g\'ri to\'ldiring.'
+                detail: "Iltimos, barcha maydonlarni to'g'ri to'ldiring."
             });
             return;
         }
@@ -154,7 +120,7 @@ export class LoginComponent {
             },
             error: (err) => {
                 this.loading.set(false);
-                const errorMessage = err?.error?.message || 'Login yoki parol noto\'g\'ri. Qaytadan urinib ko\'ring.';
+                const errorMessage = err?.error?.message || "Login yoki parol noto'g'ri. Qaytadan urinib ko'ring.";
                 this.messageService.add({
                     severity: 'error',
                     summary: 'Kirishda xatolik',
