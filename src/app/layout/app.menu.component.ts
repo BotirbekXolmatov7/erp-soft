@@ -32,9 +32,9 @@ export class AppMenuComponent {
         this.authService.currentUser();
 
         const canViewProducts = this.authService.hasPermission('products:read') || this.authService.hasPermission('PRODUCTS_VIEW');
-        const canViewWarehouse = this.authService.hasPermission('WAREHOUSE_VIEW');
+        const canViewWarehouse = this.authService.hasPermission('warehouse:read') || this.authService.hasPermission('WAREHOUSE_VIEW');
         const canViewSales = this.authService.hasPermission('SALES_VIEW');
-        const canViewProduction = this.authService.hasPermission('PRODUCTION_VIEW');
+        const canViewProduction = this.authService.hasPermission('production:read') || this.authService.hasPermission('PRODUCTION_VIEW');
         const canViewUsers = this.authService.hasPermission('USERS_VIEW');
 
         const erpItems: MenuItem[] = [
@@ -83,7 +83,7 @@ export class AppMenuComponent {
                 items: erpItems
             },
             {
-                label: 'Ma\'muriyat',
+                label: "Ma'muriyat",
                 visible: canViewUsers,
                 items: [
                     {

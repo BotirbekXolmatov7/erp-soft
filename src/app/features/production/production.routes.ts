@@ -1,6 +1,14 @@
 import { Routes } from '@angular/router';
-import { ProductionListComponent } from './pages/production-list.component';
+import { BomListComponent } from './pages/bom-list/bom-list.component';
+import { ProductionOrdersComponent } from './pages/production-orders/production-orders.component';
 
 export default [
-    { path: '', component: ProductionListComponent }
+    {
+        path: '',
+        component: BomListComponent
+    },
+    {
+        path: 'orders',
+        component: ProductionOrdersComponent
+    }
 ] as Routes;
