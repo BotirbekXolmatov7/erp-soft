@@ -81,7 +81,7 @@ export class AppMenu {
                 items: erpItems
             },
             {
-                label: 'Ma\'muriyat',
+                label: "Ma'muriyat",
                 visible: canViewUsers,
                 items: [
                     {

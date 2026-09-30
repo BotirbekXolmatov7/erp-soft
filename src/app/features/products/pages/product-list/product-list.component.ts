@@ -19,21 +19,7 @@ import { CreateProductDto, Product, ProductType, ProductUnit } from '../../model
 @Component({
     selector: 'app-product-list',
     standalone: true,
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        TableModule,
-        ToolbarModule,
-        ButtonModule,
-        InputTextModule,
-        InputNumberModule,
-        SelectModule,
-        DialogModule,
-        TagModule,
-        ToastModule,
-        IconFieldModule,
-        InputIconModule
-    ],
+    imports: [CommonModule, ReactiveFormsModule, TableModule, ToolbarModule, ButtonModule, InputTextModule, InputNumberModule, SelectModule, DialogModule, TagModule, ToastModule, IconFieldModule, InputIconModule],
     providers: [MessageService, ConfirmationService],
     template: `
         <p-toast />
@@ -50,32 +36,14 @@ import { CreateProductDto, Product, ProductType, ProductUnit } from '../../model
             <!-- Toolbar: Yangi mahsulot va Qidiruv -->
             <p-toolbar styleClass="mb-6">
                 <ng-template #start>
-                    <p-button
-                        label="Yangi mahsulot"
-                        icon="pi pi-plus"
-                        severity="primary"
-                        class="mr-2"
-                        (onClick)="openNew()"
-                    />
-                    <p-button
-                        label="Yangilash"
-                        icon="pi pi-refresh"
-                        severity="secondary"
-                        [outlined]="true"
-                        (onClick)="loadProducts()"
-                    />
+                    <p-button label="Yangi mahsulot" icon="pi pi-plus" severity="primary" class="mr-2" (onClick)="openNew()" />
+                    <p-button label="Yangilash" icon="pi pi-refresh" severity="secondary" [outlined]="true" (onClick)="loadProducts()" />
                 </ng-template>
 
                 <ng-template #end>
                     <p-iconfield>
                         <p-inputicon styleClass="pi pi-search" />
-                        <input
-                            pInputText
-                            type="text"
-                            (input)="onGlobalFilter(dt, $event)"
-                            placeholder="Qidiruv (Nomi, SKU)..."
-                            class="w-full sm:w-80"
-                        />
+                        <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Qidiruv (Nomi, SKU)..." class="w-full sm:w-80" />
                     </p-iconfield>
                 </ng-template>
             </p-toolbar>
@@ -97,27 +65,13 @@ import { CreateProductDto, Product, ProductType, ProductUnit } from '../../model
             >
                 <ng-template #header>
                     <tr>
-                        <th pSortableColumn="sku" style="width: 14%">
-                            SKU / Kod <p-sortIcon field="sku" />
-                        </th>
-                        <th pSortableColumn="name" style="width: 24%">
-                            Mahsulot nomi <p-sortIcon field="name" />
-                        </th>
-                        <th pSortableColumn="type" style="width: 16%">
-                            Turi <p-sortIcon field="type" />
-                        </th>
-                        <th pSortableColumn="unit" style="width: 10%">
-                            Birlik <p-sortIcon field="unit" />
-                        </th>
-                        <th pSortableColumn="price" style="width: 14%">
-                            Narxi <p-sortIcon field="price" />
-                        </th>
-                        <th pSortableColumn="currentStock" style="width: 12%">
-                            Qoldiq <p-sortIcon field="currentStock" />
-                        </th>
-                        <th pSortableColumn="minStockLevel" style="width: 10%">
-                            Min. Zaxira <p-sortIcon field="minStockLevel" />
-                        </th>
+                        <th pSortableColumn="sku" style="width: 14%">SKU / Kod <p-sortIcon field="sku" /></th>
+                        <th pSortableColumn="name" style="width: 24%">Mahsulot nomi <p-sortIcon field="name" /></th>
+                        <th pSortableColumn="type" style="width: 16%">Turi <p-sortIcon field="type" /></th>
+                        <th pSortableColumn="unit" style="width: 10%">Birlik <p-sortIcon field="unit" /></th>
+                        <th pSortableColumn="price" style="width: 14%">Narxi <p-sortIcon field="price" /></th>
+                        <th pSortableColumn="currentStock" style="width: 12%">Qoldiq <p-sortIcon field="currentStock" /></th>
+                        <th pSortableColumn="minStockLevel" style="width: 10%">Min. Zaxira <p-sortIcon field="minStockLevel" /></th>
                     </tr>
                 </ng-template>
 
@@ -126,25 +80,17 @@ import { CreateProductDto, Product, ProductType, ProductUnit } from '../../model
                         <td class="font-mono text-sm font-semibold">{{ product.sku }}</td>
                         <td class="font-medium text-surface-900 dark:text-surface-0">{{ product.name }}</td>
                         <td>
-                            <p-tag
-                                [value]="getTypeLabel(product.type)"
-                                [severity]="getTypeSeverity(product.type)"
-                            />
+                            <p-tag [value]="getTypeLabel(product.type)" [severity]="getTypeSeverity(product.type)" />
                         </td>
                         <td>
                             <span class="inline-block px-2 py-1 rounded text-xs bg-surface-100 dark:bg-surface-800 font-medium">
                                 {{ product.unit }}
                             </span>
                         </td>
-                        <td class="font-semibold">
-                            {{ product.price | number: '1.0-2' }} so'm
-                        </td>
+                        <td class="font-semibold">{{ product.price | number: '1.0-2' }} so'm</td>
                         <td>
                             <div class="flex items-center gap-2">
-                                <span
-                                    [class.text-red-500]="product.currentStock <= product.minStockLevel"
-                                    [class.font-bold]="product.currentStock <= product.minStockLevel"
-                                >
+                                <span [class.text-red-500]="product.currentStock <= product.minStockLevel" [class.font-bold]="product.currentStock <= product.minStockLevel">
                                     {{ product.currentStock | number }}
                                 </span>
                                 @if (product.currentStock <= product.minStockLevel) {
@@ -170,26 +116,13 @@ import { CreateProductDto, Product, ProductType, ProductUnit } from '../../model
         </div>
 
         <!-- Yangi Mahsulot Qo'shish Dialogi -->
-        <p-dialog
-            [(visible)]="productDialog"
-            [style]="{ width: '480px' }"
-            header="Yangi mahsulot yaratish"
-            [modal]="true"
-            [draggable]="false"
-            [resizable]="false"
-        >
+        <p-dialog [(visible)]="productDialog" [style]="{ width: '480px' }" header="Yangi mahsulot yaratish" [modal]="true" [draggable]="false" [resizable]="false">
             <ng-template #content>
                 <form [formGroup]="productForm" class="flex flex-col gap-4 pt-2">
                     <!-- Nomi -->
                     <div class="flex flex-col gap-2">
                         <label for="name" class="font-semibold text-surface-900 dark:text-surface-0">Mahsulot nomi *</label>
-                        <input
-                            pInputText
-                            id="name"
-                            formControlName="name"
-                            placeholder="Masalan: Paxta tolasi yoki Erkaklar ko'ylagi"
-                            [class.ng-dirty]="isFieldInvalid('name')"
-                        />
+                        <input pInputText id="name" formControlName="name" placeholder="Masalan: Paxta tolasi yoki Erkaklar ko'ylagi" [class.ng-dirty]="isFieldInvalid('name')" />
                         @if (isFieldInvalid('name')) {
                             <small class="text-red-500 font-medium">Mahsulot nomi kiritilishi shart</small>
                         }
@@ -198,13 +131,7 @@ import { CreateProductDto, Product, ProductType, ProductUnit } from '../../model
                     <!-- SKU -->
                     <div class="flex flex-col gap-2">
                         <label for="sku" class="font-semibold text-surface-900 dark:text-surface-0">SKU / Artikuli *</label>
-                        <input
-                            pInputText
-                            id="sku"
-                            formControlName="sku"
-                            placeholder="Masalan: RAW-001 yoki PRD-102"
-                            [class.ng-dirty]="isFieldInvalid('sku')"
-                        />
+                        <input pInputText id="sku" formControlName="sku" placeholder="Masalan: RAW-001 yoki PRD-102" [class.ng-dirty]="isFieldInvalid('sku')" />
                         @if (isFieldInvalid('sku')) {
                             <small class="text-red-500 font-medium">SKU kiritilishi shart</small>
                         }
@@ -214,41 +141,19 @@ import { CreateProductDto, Product, ProductType, ProductUnit } from '../../model
                     <div class="grid grid-cols-2 gap-4">
                         <div class="flex flex-col gap-2">
                             <label for="type" class="font-semibold text-surface-900 dark:text-surface-0">Turi *</label>
-                            <p-select
-                                id="type"
-                                formControlName="type"
-                                [options]="typeOptions"
-                                optionLabel="label"
-                                optionValue="value"
-                                placeholder="Turni tanlang"
-                                [fluid]="true"
-                            />
+                            <p-select id="type" formControlName="type" [options]="typeOptions" optionLabel="label" optionValue="value" placeholder="Turni tanlang" [fluid]="true" />
                         </div>
 
                         <div class="flex flex-col gap-2">
                             <label for="unit" class="font-semibold text-surface-900 dark:text-surface-0">O'lchov birligi *</label>
-                            <p-select
-                                id="unit"
-                                formControlName="unit"
-                                [options]="unitOptions"
-                                optionLabel="label"
-                                optionValue="value"
-                                placeholder="Birlikni tanlang"
-                                [fluid]="true"
-                            />
+                            <p-select id="unit" formControlName="unit" [options]="unitOptions" optionLabel="label" optionValue="value" placeholder="Birlikni tanlang" [fluid]="true" />
                         </div>
                     </div>
 
                     <!-- Narxi -->
                     <div class="flex flex-col gap-2">
                         <label for="price" class="font-semibold text-surface-900 dark:text-surface-0">Narxi (so'mda) *</label>
-                        <p-inputnumber
-                            id="price"
-                            formControlName="price"
-                            [min]="0"
-                            placeholder="0.00"
-                            [fluid]="true"
-                        />
+                        <p-inputnumber id="price" formControlName="price" [min]="0" placeholder="0.00" [fluid]="true" />
                         @if (isFieldInvalid('price')) {
                             <small class="text-red-500 font-medium">Musbat narx kiriting</small>
                         }
@@ -258,24 +163,12 @@ import { CreateProductDto, Product, ProductType, ProductUnit } from '../../model
                     <div class="grid grid-cols-2 gap-4">
                         <div class="flex flex-col gap-2">
                             <label for="minStockLevel" class="font-semibold text-surface-900 dark:text-surface-0">Min. Zaxira *</label>
-                            <p-inputnumber
-                                id="minStockLevel"
-                                formControlName="minStockLevel"
-                                [min]="0"
-                                placeholder="0"
-                                [fluid]="true"
-                            />
+                            <p-inputnumber id="minStockLevel" formControlName="minStockLevel" [min]="0" placeholder="0" [fluid]="true" />
                         </div>
 
                         <div class="flex flex-col gap-2">
                             <label for="currentStock" class="font-semibold text-surface-900 dark:text-surface-0">Boshlang'ich qoldiq</label>
-                            <p-inputnumber
-                                id="currentStock"
-                                formControlName="currentStock"
-                                [min]="0"
-                                placeholder="0"
-                                [fluid]="true"
-                            />
+                            <p-inputnumber id="currentStock" formControlName="currentStock" [min]="0" placeholder="0" [fluid]="true" />
                         </div>
                     </div>
                 </form>
@@ -283,19 +176,8 @@ import { CreateProductDto, Product, ProductType, ProductUnit } from '../../model
 
             <ng-template #footer>
                 <div class="flex justify-end gap-2">
-                    <p-button
-                        label="Bekor qilish"
-                        icon="pi pi-times"
-                        [text]="true"
-                        severity="secondary"
-                        (onClick)="hideDialog()"
-                    />
-                    <p-button
-                        label="Saqlash"
-                        icon="pi pi-check"
-                        [loading]="submitting()"
-                        (onClick)="saveProduct()"
-                    />
+                    <p-button label="Bekor qilish" icon="pi pi-times" [text]="true" severity="secondary" (onClick)="hideDialog()" />
+                    <p-button label="Saqlash" icon="pi pi-check" [loading]="submitting()" (onClick)="saveProduct()" />
                 </div>
             </ng-template>
         </p-dialog>
@@ -374,7 +256,7 @@ export class ProductListComponent implements OnInit {
             this.messageService.add({
                 severity: 'warn',
                 summary: 'Ogohlantirish',
-                detail: 'Iltimos, barcha majburiy maydonlarni to\'g\'ri to\'ldiring.'
+                detail: "Iltimos, barcha majburiy maydonlarni to'g'ri to'ldiring."
             });
             return;
         }
@@ -389,7 +271,7 @@ export class ProductListComponent implements OnInit {
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Muvaffaqiyatli',
-                    detail: 'Yangi mahsulot katalogga muvaffaqiyatli qo\'shildi.'
+                    detail: "Yangi mahsulot katalogga muvaffaqiyatli qo'shildi."
                 });
             },
             error: (err) => {

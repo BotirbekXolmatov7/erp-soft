@@ -24,7 +24,7 @@ export const appRoutes: Routes = [
                 path: 'warehouse',
                 loadChildren: () => import('./app/features/warehouse/warehouse.routes'),
                 canActivate: [permissionGuard],
-                data: { permission: 'WAREHOUSE_VIEW' }
+                data: { permissions: ['warehouse:read', 'WAREHOUSE_VIEW'] }
             },
             {
                 path: 'sales',
